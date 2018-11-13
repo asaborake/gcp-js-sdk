@@ -1,0 +1,16 @@
+{
+    "client": {
+        "id": {"value": "raksulId", "type": "STRING", "mode": "REQUIRED"},
+        "ga_id": {"value": "docCookies.getItem('_ga')", "type": "STRING", "mode": "NULLABLE"},
+        "url": {"value": "(function() {return !document.location || !document.location.href ? '' : document.location.href.split('#')[0];})()", "type": "STRING", "mode": "NULLABLE"},
+        "referrer": {"value": "(function() {return document.referrer;})()", "type": "STRING", "mode": "NULLABLE"},
+        "title": {"value": "(function() {return document.title;})()", "type": "STRING", "mode": "NULLABLE"},
+        "host": {"value": "(function() {return document.location.hostname;})()", "type": "STRING", "mode": "NULLABLE"},
+        "path": {"value": "(function() {return document.location.pathname;})()", "type": "STRING", "mode": "NULLABLE"},
+        "charset": {"value": "(function() {return (document.characterSet || document.charset || '-').toLowerCase();})()", "type": "STRING", "mode": "NULLABLE"},
+        "language": {"value": "(function() {var nav = window.navigator; return (nav && (nav.language || nav.browserLanguage) || '-').toLowerCase();})()", "type": "STRING", "mode": "NULLABLE"},
+        "color": {"value": "(function() {return window.screen ? window.screen.colorDepth + '-bit' : '-';})()", "type": "STRING", "mode": "NULLABLE"},
+        "screen": {"value": "(function() {return window.screen ? window.screen.width + 'x' + window.screen.height : '-';})()", "type": "STRING", "mode": "NULLABLE"},
+        "viewport": {"value": "(function() {var clientHeight = document.documentElement && document.documentElement.clientHeight;var clientWidth = document.documentElement && document.documentElement.clientWidth;var innerHeight = window.innerHeight;var innerWidth = window.innerWidth;var height = clientHeight < innerHeight ? innerHeight : clientHeight;var width = clientWidth < innerWidth ? innerWidth : clientWidth;return width + 'x' + height;})()", "type": "STRING", "mode": "NULLABLE"}    
+    }
+}

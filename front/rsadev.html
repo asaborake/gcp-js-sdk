@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SDK開発</title>
+        <!-- HTMLソースに直接埋め込むならこれでOK
+        <script async src="https://asia-northeast1-piu-crm-001.cloudfunctions.net/raksulGET/collect"></script>
+        -->
+        <!-- raksul.jsやGTMなど外部jsの仕組みに埋め込むならこの形-->
+        <script>
+            const crm = (region,projectId,functionName) => {
+                const hostname = document.location.hostname;
+                const endpoint = `https://${region}-${projectId}.cloudfunctions.net/${functionName}/collect?hostname=${hostname}`;
+                const addElement = document.createElement('script');
+                const endElement = document.getElementsByTagName('script')[0];
+                addElement.async = 1;
+                addElement.src = endpoint;
+                endElement.parentNode.insertBefore(addElement,endElement);
+            };
+            crm('asia-northeast1', 'raksulcrm-dev', 'analytics');
+        </script>
+    </head>
+    <body>
+        <h1>Hello,Raksul</h1>
+    </body>
+</html>

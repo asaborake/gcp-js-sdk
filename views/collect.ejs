@@ -1,0 +1,30 @@
+'use strict';
+<% var lastkey = Object.keys(data).pop(); %>
+<% include function_cookie %>
+
+var requrl = "<%- endpoint %>/api";
+var raksulId = "";
+if(docCookies.getItem("raksul_id") !== null){
+    raksulId = docCookies.getItem("raksul_id");
+} else {
+    docCookies.setItem("raksul_id", "<%= uuid %>", Infinity, "", ".raksul.com", "");
+    raksulId = "<%= uuid %>";
+}
+var ra = {<% for(var i in data) {if (i !== 'client') {%>
+    <%- i %>: {value: <% if((data[i].type === "STRING" || data[i].type === "DATETIME") && i !== 'event'){ %>'<%- data[i].value %>'<% } else { %><%- data[i].value %><% } %>, type: "<%- data[i].type %>", mode: "<%- data[i].mode %>"}<% if(lastkey !== i) { %>,<% } else { %><% }} else { for(var f in data[i]) { %>
+    <%- f %>: {value: <%- data[i][f].value %>, type: '<%- data[i][f].type %>', mode: "<%- data[i][f].mode %>"},<% }}} %>
+};
+ra.payload.value = {
+    raksulUserId : docCookies.getItem("raksul_user_id")
+};
+var ajax = function (data) {
+    var xhr= new XMLHttpRequest();
+    xhr.open("POST",requrl,true);
+    xhr.responseType = 'json';
+    xhr.setRequestHeader("Content-Type","application/json");
+    xhr.send(data);
+};
+var defaultData = function(){
+    ajax(JSON.stringify(ra));
+};
+window.addEventListener("load", defaultData, false);
